@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GlotPress .po 優先度フィルタ</title>
+    <meta
+      name="description"
+      content="GlotPress の .po から gp-priority の翻訳単位を除外してダウンロードします。処理はブラウザ内だけです。"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <header class="masthead">
+        <p class="eyebrow">GlotPress / WordPress</p>
+        <h1>.po 優先度フィルタ</h1>
+        <p class="lede">
+          <code>gp-priority</code> が付いた翻訳単位を除いて、新しい
+          <code>.po</code> を書き出します。空の
+          <code>msgid</code> ヘッダーは常に残し、残した単位のコメントとフラグはそのまま保持します。ファイルはブラウザの外に出ません。
+        </p>
+      </header>
+
+      <section class="panel" aria-labelledby="load-heading">
+        <h2 id="load-heading">読み込み</h2>
+        <label id="dropzone" class="dropzone" for="file-input">
+          <input id="file-input" type="file" accept=".po,.pot,text/plain" />
+          <span class="dropzone-title">.po をドロップ、またはクリックして選択</span>
+          <span class="dropzone-note">.pot も同じ形式として読みます</span>
+        </label>
+        <p id="file-name" class="file-name"></p>
+        <label class="field-label" for="source">または .po を貼り付け</label>
+        <textarea
+          id="source"
+          spellcheck="false"
+          wrap="off"
+          placeholder="#. comment&#10;#, gp-priority: low&#10;msgid &quot;Example&quot;&#10;msgstr &quot;例&quot;"
+        ></textarea>
+      </section>
+
+      <section class="panel" aria-labelledby="filter-heading">
+        <h2 id="filter-heading">除外する優先度</h2>
+        <p class="hint">チェックした優先度の翻訳単位を出力から除きます。フラグが無い単位は normal として扱います。</p>
+        <div class="checks">
+          <label><input id="exclude-high" type="checkbox" /> high（高）</label>
+          <label><input id="exclude-normal" type="checkbox" /> normal（通常）</label>
+          <label><input id="exclude-low" type="checkbox" checked /> low（低）</label>
+          <label><input id="exclude-hidden" type="checkbox" checked /> hidden（非表示）</label>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="result-heading">
+        <h2 id="result-heading">結果</h2>
+        <p id="summary" class="summary" aria-live="polite"></p>
+        <ul id="counts" class="counts"></ul>
+        <button id="download" type="button" disabled>フィルタした .po をダウンロード</button>
+        <h3>出力プレビュー</h3>
+        <pre id="preview" class="preview"></pre>
+      </section>
+    </main>
+    <script src="po.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
