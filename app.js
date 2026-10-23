@@ -73,9 +73,7 @@
       counts.appendChild(li);
     });
 
-    var lines = result.text.split("\n");
-    var head = lines.slice(0, 40).join("\n");
-    preview.textContent = lines.length > 40 ? head + "\n…" : head;
+    preview.textContent = result.text;
     downloadBtn.disabled = false;
   }
 
